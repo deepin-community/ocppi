@@ -1,3 +1,1 @@
 0001-build-downgrade-catch2-to-2.13.7.patch
-0002-build-make-GitSemver-work-without-git-and-sed.patch
-0003-build-correct-libsystemd-name.patch
