@@ -1,3 +1,14 @@
+ocppi (0.1.8-rc.2-0deepin1) UNRELEASED; urgency=medium
+
+  [ black-desk ]
+  * New upstream version 0.1.7
+  * fix: add some patches to fix build
+  * New upstream version 0.1.8-rc.2
+  * chore: remove unused patches
+  * chore: regen patches
+
+ -- Chen Linxuan <me@black-desk.cn>  Tue, 17 Oct 2023 18:22:11 +0800
+
 ocppi (0.1.7-0deepin1) unstable; urgency=medium
 
   * Initial release
