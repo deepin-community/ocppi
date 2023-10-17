@@ -1,0 +1,27 @@
+From: black-desk <me@black-desk.cn>
+Date: Tue, 17 Oct 2023 09:48:57 +0800
+Subject: build: downgrade catch2 to 2.13.7
+
+deepin develop only has catch2 2.13.7.
+
+As this library has no test at this time, it is not really using Catch2.
+
+It's good enough to downgrade catch2 to 2.13.7 to make it built on
+deepin develop CI.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4698d4f..653b9f8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,7 +46,7 @@ CPMFindPackage(
+ 
+ CPMFindPackage(
+   NAME Catch2
+-  VERSION 2.13.10
++  VERSION 2.13.7
+   GITHUB_REPOSITORY catchorg/Catch2
+   GIT_TAG v2.13.10
+   GIT_SHALLOW ON

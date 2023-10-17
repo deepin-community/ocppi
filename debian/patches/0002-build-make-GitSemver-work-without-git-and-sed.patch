@@ -1,0 +1,45 @@
+From: black-desk <me@black-desk.cn>
+Date: Tue, 17 Oct 2023 10:12:16 +0800
+Subject: build: make GitSemver work without git and sed
+
+Do not using REQUIRED to find_package/find_exectuable.
+
+As REQUIRED leading to directly failed inside GitSemver,
+GitSemver should not produce an error if failed to found version
+information from git repository.
+---
+ cmake/GitSemver.cmake | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/GitSemver.cmake b/cmake/GitSemver.cmake
+index b209f07..5843fc0 100644
+--- a/cmake/GitSemver.cmake
++++ b/cmake/GitSemver.cmake
+@@ -27,8 +27,16 @@ function(GitSemver varname)
+ 
+   gitsemver_message("Getting version from git repository ...")
+ 
+-  find_package(Git REQUIRED)
+-  find_program(SED_EXECUTABLE NAMES sed REQUIRED)
++  find_package(Git)
++  if(NOT GIT_FOUND)
++    gitsemver_message("Failed: git executable not found.")
++    return()
++  endif()
++  find_program(SED_EXECUTABLE NAMES sed)
++  if(NOT SED_EXECUTABLE)
++    gitsemver_message("Failed: sed executable not found.")
++    return()
++  endif()
+   execute_process(
+     COMMAND ${GIT_EXECUTABLE} describe --tags --long --dirty
+     COMMAND ${SED_EXECUTABLE} -e s/-\\\([[:digit:]]\\+\\\)-g/+\\1\\./
+@@ -41,7 +49,7 @@ function(GitSemver varname)
+ 
+   foreach(ret ${rets})
+     if(NOT ret EQUAL 0)
+-      gitsemver_message("Failed.")
++      gitsemver_message("Failed: command failed.")
+       return()
+     endif()
+   endforeach()

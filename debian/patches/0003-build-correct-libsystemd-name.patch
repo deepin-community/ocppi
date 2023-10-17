@@ -1,0 +1,26 @@
+From: black-desk <me@black-desk.cn>
+Date: Tue, 17 Oct 2023 11:09:26 +0800
+Subject: build: correct libsystemd name
+
+---
+ libs/cli/examples/using-crun/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libs/cli/examples/using-crun/CMakeLists.txt b/libs/cli/examples/using-crun/CMakeLists.txt
+index c214fc2..fb2406e 100644
+--- a/libs/cli/examples/using-crun/CMakeLists.txt
++++ b/libs/cli/examples/using-crun/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ find_package(
+   PkgConfig REQUIRED)
+-pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
++pkg_check_modules(systemd REQUIRED IMPORTED_TARGET libsystemd)
+ 
+ pfl_add_executable(
+   INTERNAL
+@@ -10,4 +10,4 @@ pfl_add_executable(
+   PUBLIC
+   ocppi::cli
+   PRIVATE
+-  systemd)
++  PkgConfig::systemd)
