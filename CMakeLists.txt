@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.23)
 project(
   ocppi
   LANGUAGES CXX
-  VERSION 0.1.7)
+  VERSION 0.1.8)
 
 option(OCPPI_BUILD_EXAMPLES "Build examples of ocppi or not"
        ${PROJECT_IS_TOP_LEVEL})
@@ -53,12 +53,16 @@ CPMFindPackage(
   EXCLUDE_FROM_ALL ON)
 
 CPMFindPackage(
-  NAME Boost COMPONENTS headers
+  NAME Boost COMPONENTS process
   VERSION 1.74.0
   GITHUB_REPOSITORY "boostorg/boost"
-  GIT_TAG "boost-1.74.0"
+  GIT_TAG "boost-1.81.0"
   GIT_SHALLOW ON
   EXCLUDE_FROM_ALL ON)
+
+if(NOT TARGET Boost::process)
+  add_library(Boost::process ALIAS Boost::headers)
+endif()
 
 CPMFindPackage(
   NAME spdlog
