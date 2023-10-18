@@ -1,0 +1,32 @@
+From: black-desk <me@black-desk.cn>
+Date: Wed, 18 Oct 2023 18:07:24 +0800
+Subject: build: remove Catch2
+
+Debian sid has version 3.4.0 and deepin v23 has 2.13.7 at this point.
+These two version is not compatible.
+
+This package doesn't use catch2 to do anything at this version.
+It is OK to just remove it.
+---
+ CMakeLists.txt | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5b66df2..091de0d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,14 +44,6 @@ CPMFindPackage(
+   GIT_SHALLOW ON
+   EXCLUDE_FROM_ALL ON)
+ 
+-CPMFindPackage(
+-  NAME Catch2
+-  VERSION 2.13.10
+-  GITHUB_REPOSITORY catchorg/Catch2
+-  GIT_TAG v2.13.10
+-  GIT_SHALLOW ON
+-  EXCLUDE_FROM_ALL ON)
+-
+ CPMFindPackage(
+   NAME Boost COMPONENTS process
+   VERSION 1.74.0
