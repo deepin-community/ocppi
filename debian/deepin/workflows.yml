@@ -15,6 +15,12 @@ test_build:
             architectures:
               - x86_64
               - aarch64
+          - name: debian
+            paths:
+              - target_project: deepin:CI
+                target_repository: debian_sid
+            architectures:
+              - x86_64
 
   filters:
     event: pull_request
